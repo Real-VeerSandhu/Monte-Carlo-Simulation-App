@@ -1,7 +1,7 @@
 ## Monte Carlo Stock Portfolio Simulation
 
 ### Overview
-This project is a **Monte Carlo Stock Portfolio Simulation** tool built using **Streamlit**. It allows users to select a portfolio of stocks, allocate percentage weights, and run Monte Carlo simulations to project future portfolio performance based on historical stock data.
+This project is a **Monte Carlo Stock Portfolio Simulation** [web app](https://monte-carlo-sim.streamlit.app/) built using **Streamlit**. It allows users to select a portfolio of stocks, allocate percentage weights, and run Monte Carlo simulations to forecast future portfolio performance based on historical stock data.
 
 ### Features
 - **Interactive stock selection**: Choose from a list of stocks.
@@ -52,7 +52,7 @@ pip install streamlit pandas numpy matplotlib yfinance plotly
 - **Yahoo Finance (yfinance)**: Stock market data retrieval
 
 ### Example Output
-![Example Monte Carlo Simulation](https://via.placeholder.com/800x400?text=Example+Monte+Carlo+Plot)
+![Example Monte Carlo Simulation](https://github.com/Real-VeerSandhu/Monte-Carlo-Simulation-App/blob/main/sim.png)
 
 ### License
 This project is licensed under the MIT License.

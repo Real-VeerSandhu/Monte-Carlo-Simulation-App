@@ -1,7 +1,7 @@
 ## Monte Carlo Stock Portfolio Simulation
 
 ### Overview
-This project is a **Monte Carlo Stock Portfolio Simulation** tool built using **Streamlit**. It allows users to select a portfolio of stocks, allocate percentage weights, and run Monte Carlo simulations to project future portfolio performance based on historical stock data.
+This project is a **Monte Carlo Stock Portfolio Simulation** web app built using **Streamlit**. It allows users to select a portfolio of stocks, allocate percentage weights, and run Monte Carlo simulations to forecast future portfolio performance based on historical stock data.
 
 ### Features
 - **Interactive stock selection**: Choose from a list of stocks.

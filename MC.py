@@ -7,9 +7,24 @@ import numpy as np
 import matplotlib.pyplot as plt
 import datetime as dt
 import yfinance as yf
+from pandas_datareader import data as pdr
+
+import yfinance as yf
+
+stock = 'AAPL'  # Example stock ticker
+data = yf.download([stock], period='1mo')
+close_prices = data['Close']
+print('AAPL:', close_prices)
+
 
 def get_data(stocks, start, end):
-    stockData = yf.download(stocks, start=start, end=end)['Close']
+    stockData = yf.download(stocks, start=start, end=end)
+    
+    if stockData.empty:
+        print("No data downloaded for the stocks.")
+        return None, None
+
+    stockData = stockData['Close']
     returns = stockData.pct_change()
     meanReturns = returns.mean()
     covMatrix = returns.cov()
@@ -17,46 +32,52 @@ def get_data(stocks, start, end):
     return meanReturns, covMatrix
 
 stockList = ['CBA', 'BHP', 'TLS', 'NAB', 'WBC', 'STO']
-stocks = [stock + '.AX' for stock in stockList]
+stocks = [stock + '' for stock in stockList]
 endDate = dt.datetime.now()
 startDate = endDate - dt.timedelta(days=300) # very important parameters
 
 meanReturns, covMatrix = get_data(stocks, startDate, endDate)
 
-weights = np.random.random(len(meanReturns)) # get random num from 0 to 1
+if meanReturns is not None and covMatrix is not None:
+    print(meanReturns)
+    print(covMatrix)
+else:
+    print("Failed to retrieve data for some or all stocks.")
 
-weights /= np.sum(weights)
+# weights = np.random.random(len(meanReturns)) # get random num from 0 to 1
 
-print(weights)
+# weights /= np.sum(weights)
 
-# Monte Carlo Simulation
-# number of simulations
+# print(weights)
 
-mc_sims = 100
-T = 100 # timeframe in days
+# # Monte Carlo Simulation
+# # number of simulations
 
-meanM = np.full(shape=(T, len(weights)), fill_value=meanReturns)
-meanM = meanM.T
+# mc_sims = 100
+# T = 100 # timeframe in days
 
-portfolio_sims = np.full(shape=(T, mc_sims), fill_value=0.0)
+# meanM = np.full(shape=(T, len(weights)), fill_value=meanReturns)
+# meanM = meanM.T
 
-initialPortfolio = 10000
+# portfolio_sims = np.full(shape=(T, mc_sims), fill_value=0.0)
 
-# Assume daily returns are distributed by a Multivariate Normal Distribution
-# Use Cholesky Decomposition to determine Lower Triangular Matrix
-for m in range(0, mc_sims):
-    # MC loops
-    Z = np.random.normal(size=(T, len(weights))) # T by weights (number of stocks)
+# initialPortfolio = 10000
 
-    # lower triangular matrix
-    L = np.linalg.cholesky(covMatrix) # number stocks by number of stocks
+# # Assume daily returns are distributed by a Multivariate Normal Distribution
+# # Use Cholesky Decomposition to determine Lower Triangular Matrix
+# for m in range(0, mc_sims):
+#     # MC loops
+#     Z = np.random.normal(size=(T, len(weights))) # T by weights (number of stocks)
 
-    # inner product = dot product
-    dailyReturns = meanM + np.inner(L, Z)
-    portfolio_sims[:, m] = np.cumprod(np.inner(weights, dailyReturns.T)+1)*initialPortfolio
+#     # lower triangular matrix
+#     L = np.linalg.cholesky(covMatrix) # number stocks by number of stocks
 
-plt.plot(portfolio_sims)
-plt.ylabel('Portfolio Value ($)')
-plt.xlabel('Days')
-plt.title('Monte Carlo Stock Portfolio Simulation')
-plt.show()
+#     # inner product = dot product
+#     dailyReturns = meanM + np.inner(L, Z)
+#     portfolio_sims[:, m] = np.cumprod(np.inner(weights, dailyReturns.T)+1)*initialPortfolio
+
+# plt.plot(portfolio_sims)
+# plt.ylabel('Portfolio Value ($)')
+# plt.xlabel('Days')
+# plt.title('Monte Carlo Stock Portfolio Simulation')
+# plt.show()

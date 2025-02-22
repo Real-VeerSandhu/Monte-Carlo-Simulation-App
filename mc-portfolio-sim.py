@@ -17,7 +17,7 @@ import plotly.graph_objs as go
 
 st.set_page_config(
     page_title="Monte Carlo Stock Portfolio Simulatione",
-    page_icon="feature.png",  
+    page_icon="beta.svg",  
     layout="wide",  
 )
 st.title('Monte Carlo Stock Portfolio Simulation')

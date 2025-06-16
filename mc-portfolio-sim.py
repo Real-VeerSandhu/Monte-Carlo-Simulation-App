@@ -159,3 +159,4 @@ with col2:
 st.caption('Built with Python, Streamlit, Numpy, Pandas, Yahoo Finance, Plotly')
 st.caption('Veer Sandhu - 2024')
 st.caption("[Github](https://github.com/Real-VeerSandhu/Monte-Carlo-Simulation-App)")
+
